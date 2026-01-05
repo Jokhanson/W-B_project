@@ -1,21 +1,25 @@
-document.querySelector('.gallery-scroll').addEventListener('wheel', function (event) {
-    if (event.deltaY !== 0) {
-        // Прокручиваем контейнер вправо или влево в зависимости от направления колесика
-        this.scrollBy({
-            left: event.deltaY < 0 ? -250 : 250, // Скорость прокрутки
-            behavior: 'smooth' // Плавная прокрутка
-        });
-        event.preventDefault(); // Отменяем стандартное поведение прокрутки
-    }
-});
+const galleryScroll = document.querySelector('.gallery-scroll');
 
+if (galleryScroll) {
+  // Use native scrolling (like .portfolio) — avoid intercepting wheel/pointer handlers
+  // Keep smooth keyboard navigation for accessibility
+  galleryScroll.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); this.scrollBy({ left: -400, behavior: 'smooth' }); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); this.scrollBy({ left: 400, behavior: 'smooth' }); }
+  });
+}
+
+// Hover expand still handled, and add focus/blur for keyboard users
 document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.classList.add('expanded'); // Добавляем класс expanded при наведении
-    });
+    item.addEventListener('mouseenter', () => item.classList.add('expanded'));
+    item.addEventListener('mouseleave', () => item.classList.remove('expanded'));
+    item.addEventListener('focus', () => item.classList.add('expanded'));
+    item.addEventListener('blur', () => item.classList.remove('expanded'));
 });
 
 document.addEventListener("DOMContentLoaded", function() {
   const gallery = document.querySelector(".gallery");
-  gallery.style.transform = "translateX(0)"; // Возвращаем галерею на место
+  if (gallery) gallery.style.transform = "translateX(0)";
+  // Make gallery items focusable for keyboard users
+  document.querySelectorAll('.gallery-item').forEach(item => item.tabIndex = 0);
 });

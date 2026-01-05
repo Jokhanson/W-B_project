@@ -458,27 +458,44 @@ body {
   cursor: pointer;
   gap: 10px;
   padding: 15px;
+  overflow: hidden;
 }
 
 .icontg {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.3s ease;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.36s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.36s, background 0.24s;
   transform-origin: center;
-  scale: 3.5;
+  transform: scale(1);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}   
+
+.icontg:hover,
+.icontg:focus-visible {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.12);
+  transform: scale(1.06);
 }
 
 .card:hover .icontg {
-  transform: scale(1.2) translateY(-18px);
+  transform: scale(3) translateY(-24px);
 }
 
-.card:hover .textBox {
-  bottom: 0;
-  opacity: 1;
+/* When hovering directly on the icon, show a subtle btn-secondary-like effect and prefer it over the parent rule */
+.card .icontg:hover,
+.card .icontg:focus-visible {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.12);
+  transform: scale(1.06) !important;
 }
+
 
 .textBox {
   position: absolute;

@@ -1,0 +1,12 @@
+{
+  "name": "frame-by-frame",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "optimize-images": "node scripts/convert-images.js"
+  },
+  "devDependencies": {
+    "glob": "^8.1.0",
+    "sharp": "^0.32.0"
+  }
+}
